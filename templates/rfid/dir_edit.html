@@ -1,0 +1,78 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block content %}
+<header id="topnav" style="position: fixed; right: 0; left: 0; top: 0; z-index: 1030; min-height: 62px;">
+    <div class="topbar-main" style="background-color: #fd6e77; height:60px;">
+        <div class="container-fluid" style="width: 95%;">
+            <div class="logo" style="line-height: 55px;">
+                <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1625816066/%EC%9B%8C%EB%84%88%EB%B2%84%EC%8A%A4%EC%9D%B4%EB%85%B8%EB%B2%A0%EC%9D%B4%EC%85%98%EB%A1%9C%EA%B3%A02_wqthvw.jpg"
+                alt height="32">
+            </div>
+        </div>
+    </div>
+    <div class="nvbar-custom active" style="background-color: #fff; height:60px;">
+        <div class="container-fluid" style="width: 98%;">
+            <div id="navigation" class="active">
+                <ul class="navigation-menu">
+                    <li class="has-submenu active" style="display: inline-block; position: relative;">
+                        <a href="{% url 'rfid:main' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Dashboard</a>
+                    </li>
+                    <li class="has-submenu active" style="display: inline-block; position: relative;">
+                        <a href="{% url 'rfid:index' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Material_Warehouse</a>
+                    </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                          <a href="{% url 'rfid:proline' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Production_Line</a>
+                     </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                         <a href="{% url 'rfid:fpware' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Finished_Product_Warehouse</a>
+                     </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                         <a href="{% url 'rfid:dir' %}" style="color: #fd6e77; line-height: 55px; padding-right: 80px; font-weight:bold;">Direction</a>
+                     </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-3" style="padding-top: 130px;">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>작업날짜</th>
+            <th>RFID넘버</th>
+            <th>게이트ID</th>
+            <th>이동방향</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          </td>
+            <td>{{ direction.Work_Date|date:"Y-m-d H:i:s" }}</td>
+            <td>{{ direction.RFID_Number_dr }}</td>
+            <td>{{ direction.Gate_ID}}</td>
+            <td>{{ direction.Direction }}</td>
+        </tr>
+        </tbody>
+    </table>
+          <div class="my-3" style="float:right;">
+            <a href="{% url 'rfid:dir_mdf' direction.id  %}"
+               class="btn btn-primary">수정</a>
+            <a href="#" class="delete btn btn-primary"
+               data-uri="{% url 'rfid:dir_del' direction.id  %}">삭제</a>
+            <a href="{% url 'rfid:dir' %}"
+               class="btn btn-primary">목록으로</a>
+        </div>
+</div>
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".delete").on('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = $(this).data('uri');
+        }
+    });
+});
+</script>
+{% endblock %}

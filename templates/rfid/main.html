@@ -1,0 +1,340 @@
+{% extends 'base2.html' %}
+{% block content %}
+<header id="topnav" style="position: fixed; right: 0; left: 0; top: 0; z-index: 1030; min-height: 62px;">
+    <div class="topbar-main" style="background-color: #fd6e77; height:60px;">
+        <div class="container-fluid" style="width: 95%;">
+            <div class="logo" style="line-height: 55px;">
+                <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1625816066/%EC%9B%8C%EB%84%88%EB%B2%84%EC%8A%A4%EC%9D%B4%EB%85%B8%EB%B2%A0%EC%9D%B4%EC%85%98%EB%A1%9C%EA%B3%A02_wqthvw.jpg"
+                alt height="32">
+            </div>
+        </div>
+    </div>
+    <div class="nvbar-custom active" style="background-color: #fff; height:60px;">
+        <div class="container-fluid" style="width: 98%;">
+            <div id="navigation" class="active">
+                <ul class="navigation-menu">
+                    <li class="has-submenu active" style="display: inline-block; position: relative;">
+                        <a href="{% url 'rfid:main' %}" style="color: #fd6e77; line-height: 55px; padding-right: 80px; font-weight:bold;">Dashboard</a>
+                    </li>
+                    <li class="has-submenu active" style="display: inline-block; position: relative;">
+                        <a href="{% url 'rfid:index' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Material_Warehouse</a>
+                    </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                          <a href="{% url 'rfid:proline' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Production_Line</a>
+                     </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                         <a href="{% url 'rfid:fpware' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Finished_Product_Warehouse</a>
+                     </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                         <a href="{% url 'rfid:dir' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Direction</a>
+                     </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="wrapper" style="padding-top: 120px;">
+    <div class="container-fluid" style="width: 95%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto;">
+        <div class="row" style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;">
+            <div class="col-sm-12">
+                <div class="page-title-box" style="padding: 22px 0;">
+                    <h4 class="page-title">룰 기반의 스마트 팩토리 상황 정보</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat m-b-30" style="margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none; overflow: hidden;">
+                    <div class="p-3 bg-primary text-white" style="background-color: #fd6e77!important;">
+                        <a href="{% url 'rfid:rule1' %}" style="color:white; font-size:15pt; font-weight:bold;">Case1</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="m-0">룰 기반의 스마트 팩토리 상황정보1</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat m-b-30" style="margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none; overflow: hidden;">
+                    <div class="p-3 bg-primary text-white" style="background-color: #fd6e77!important;">
+                        <a href="{% url 'rfid:rule2' %}" style="color:white; font-size:15pt; font-weight:bold;">Case2</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="m-0">룰 기반의 스마트 팩토리 상황정보2</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat m-b-30" style="margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none; overflow: hidden;">
+                    <div class="p-3 bg-primary text-white" style="background-color: #fd6e77!important;">
+                        <a href="{% url 'rfid:rule3' %}" style="color:white; font-size:15pt; font-weight:bold;">Case3</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="m-0">룰 기반의 스마트 팩토리 상황정보3</h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-xl-3 col-md-6">
+                <div class="card mini-stat m-b-30" style="margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none; overflow: hidden;">
+                    <div class="p-3 bg-primary text-white" style="background-color: #fd6e77!important;">
+                        <a href="{% url 'rfid:rule4' %}" style="color:white; font-size:15pt; font-weight:bold;">Case4</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="m-0">룰 기반의 스마트 팩토리 상황정보4</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box" style="padding: 22px 0;">
+                    <h4 class="page-title">스마트 팩토리 정보 시각화 그래프</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card m-b-30" style="background-color: #fff; margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none;">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">그래프1</h4>
+                         <div class="col-md-6" style="margin-top: 20px;">
+                             <div class="chart-container" style="position: relative; height:28vh; width:58vw;">
+                                        <canvas id="chart1"></canvas>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card-m-b30" style="background-color: #fff; margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none;">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">그래프2</h4>
+                        <div style="margin-top: 20px;">
+                            <canvas id="chart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card-m-b30" style="background-color: #fff; margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none;">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">그래프3</h4>
+                        <div style="margin-top: 20px;">
+                            <canvas id="chart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card-m-b30" style="background-color: #fff; margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none;">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">그래프4</h4>
+                        <div style="margin-top: 20px;">
+                            <canvas id="chart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card-m-b30" style="background-color: #fff; margin-bottom: 30px; box-shadow: 1px 0 20px rgb(0 0 0 / 5%); border: none;">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">그래프5</h4>
+                        <div style="margin-top: 20px;">
+                            <canvas id="chart5"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var ctx1 = document.getElementById('chart1').getContext('2d')
+var ctx2 = document.getElementById('chart2').getContext('2d')
+var ctx3 = document.getElementById('chart3').getContext('2d')
+var ctx4 = document.getElementById('chart4').getContext('2d')
+var ctx5 = document.getElementById('chart5').getContext('2d')
+
+var chart1 = new Chart(ctx1, {
+    type: 'line',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                fill: false,
+                backgroundColor:'rgb(255, 99, 132)',
+                borderColor:'rgb(255, 99, 132)',
+                tension: 0.1
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [86, 117, 65, 31, 289, 203, 153],
+                fill: false,
+                backgroundColor:'rgb(54, 162, 235)',
+                borderColor:'rgb(54, 162, 235)',
+                tension: 0.1
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+    maintainAspectRatio: false,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Line Chart'
+      }
+  },
+});
+
+var chart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                fill: false,
+                backgroundColor:'rgb(255, 99, 132)',
+                tension: 0.1
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [86, 117, 65, 31, 289, 203, 153],
+                fill: false,
+                backgroundColor:'rgb(54, 162, 235)',
+                tension: 0.1
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Bar Chart'
+      }
+  },
+});
+
+var chart3 = new Chart(ctx3, {
+    type: 'radar',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [86, 117, 65, 31, 289, 203, 153],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                pointBackgroundColor: 'rgb(54, 162, 235)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(54, 162, 235)'
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Rader Chart'
+      }
+  },
+});
+
+var chart4 = new Chart(ctx4, {
+    type: 'pie',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                backgroundColor: [
+                      'rgb(255, 99, 132)',
+                      'rgb(54, 162, 235)',
+                      'rgb(255, 205, 86)',
+                      'rgb(252, 147, 11)',
+                      'rgb(58, 263, 114)',
+                      'rgb(163, 58, 243)',
+                      'rgb(58, 243, 225)'
+                    ]
+                  },
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Pie Chart',
+      }
+  },
+});
+
+var chart5 = new Chart(ctx5, {
+    type: 'bubble',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [{x:20,y:264,r:5},
+                {x:127,y:32,r:25},
+                {x:63,y:96,r:20},
+                {x:82,y:174,r:25},
+                {x:268,y:230,r:15},
+                {x:289,y:64,r:10},
+                {x:217,y:157,r:15}
+                ],
+                backgroundColor:'rgb(255, 99, 132)'
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [{x:30,y:56,r:15},
+                {x:72,y:285,r:10},
+                {x:147,y:148,r:10},
+                {x:210,y:67,r:20},
+                {x:257,y:124,r:15},
+                {x:291,y:194,r:10},
+                {x:176,y:226,r:10}
+                ],
+                backgroundColor:'rgb(54, 162, 235)'
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Bubble Chart'
+      }
+  },
+});
+
+</script>
+{% endblock %}

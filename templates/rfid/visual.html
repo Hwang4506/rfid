@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>스마트 팩토리 시각화 그래프</h1>
+        스마트 팩토리 그래프1
+        스마트 팩토리 그래프2
+        스마트 팩토리 그래프3
+        스마트 팩토리 그래프4
+        스마트 팩토리 그래프5
+    </pre>
+        <div class="col-md-6" style="position: absolute; left: 700px; top:150px; width:30vw; height:30vh;">
+            <canvas id="chart1"></canvas>
+        </div>
+        <div class="col-md-6" style="position: absolute; left: 1700px; top:150px; width:30vw; height:30vh;">
+            <canvas id="chart2"></canvas>
+        </div>
+        <div class="col-md-6" style="position: absolute; left: -50px; top:800px; width:30vw; height:30vh;">
+            <canvas id="chart3"></canvas>
+        </div>
+        <div class="col-md-6" style="position: absolute; left:700px; top:800px; width:30vw; height:30vh;">
+            <canvas id="chart4"></canvas>
+        </div>
+        <div class="col-md-6" style="position: absolute; left: 1700px; top: 800px; width:30vw; height:30vh;">
+            <canvas id="chart5"></canvas>
+        </div>
+<!--
+<div class="chart-container" style="position: relative;, height:30vh; width:30vw">
+    <canvas id="chart1"></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:50vh; width:50vw">
+    <canvas id="chart2"></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:50vh; width:50vw">
+    <canvas id="chart3"></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:50vh; width:50vw">
+    <canvas id="chart4"></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:50vh; width:50vw">
+    <canvas id="chart5"></canvas>
+</div>
+-->
+<script>
+var ctx1 = document.getElementById('chart1').getContext('2d')
+var ctx2 = document.getElementById('chart2').getContext('2d')
+var ctx3 = document.getElementById('chart3').getContext('2d')
+var ctx4 = document.getElementById('chart4').getContext('2d')
+var ctx5 = document.getElementById('chart5').getContext('2d')
+var chart1 = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                fill: false,
+                backgroundColor:'rgb(255, 99, 132)',
+                tension: 0.1
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [86, 117, 65, 31, 289, 203, 153],
+                fill: false,
+                backgroundColor:'rgb(54, 162, 235)',
+                tension: 0.1
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Bar Chart'
+      }
+  },
+});
+
+var chart2 = new Chart(ctx2, {
+    type: 'line',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                fill: false,
+                backgroundColor:'rgb(255, 99, 132)',
+                borderColor:'rgb(255, 99, 132)',
+                tension: 0.1
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [86, 117, 65, 31, 289, 203, 153],
+                fill: false,
+                backgroundColor:'rgb(54, 162, 235)',
+                borderColor:'rgb(54, 162, 235)',
+                tension: 0.1
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Line Chart'
+      }
+  },
+});
+
+var chart3 = new Chart(ctx3, {
+    type: 'radar',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [86, 117, 65, 31, 289, 203, 153],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                pointBackgroundColor: 'rgb(54, 162, 235)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(54, 162, 235)'
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Rader Chart'
+      }
+  },
+});
+
+var chart4 = new Chart(ctx4, {
+    type: 'pie',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [32, 154, 260, 128, 86, 98, 42],
+                backgroundColor: [
+                      'rgb(255, 99, 132)',
+                      'rgb(54, 162, 235)',
+                      'rgb(255, 205, 86)',
+                      'rgb(252, 147, 11)',
+                      'rgb(58, 263, 114)',
+                      'rgb(163, 58, 243)',
+                      'rgb(58, 243, 225)'
+                    ]
+                  },
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Pie Chart',
+      }
+  },
+});
+
+var chart5 = new Chart(ctx5, {
+    type: 'bubble',
+    data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                label: 'Dataset 1',
+                data: [{x:20,y:264,r:5},
+                {x:127,y:32,r:25},
+                {x:63,y:96,r:20},
+                {x:82,y:174,r:25},
+                {x:268,y:230,r:15},
+                {x:289,y:64,r:10},
+                {x:217,y:157,r:15}
+                ],
+                backgroundColor:'rgb(255, 99, 132)'
+                  },
+                  {
+                label: 'Dataset 2',
+                data: [{x:30,y:56,r:15},
+                {x:72,y:285,r:10},
+                {x:147,y:148,r:10},
+                {x:210,y:67,r:20},
+                {x:257,y:124,r:15},
+                {x:291,y:194,r:10},
+                {x:176,y:226,r:10}
+                ],
+                backgroundColor:'rgb(54, 162, 235)'
+                  }
+                  ]
+            },
+             options: {
+    responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Bubble Chart'
+      }
+  },
+});
+</script>
+{% endblock %}

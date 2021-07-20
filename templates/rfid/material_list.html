@@ -1,0 +1,187 @@
+{% extends 'base2.html' %}
+{% load page_filter %}
+{% block content %}
+<header id="topnav" style="position: fixed; right: 0; left: 0; top: 0; z-index: 1030; min-height: 62px;">
+    <div class="topbar-main" style="background-color: #fd6e77; height:60px;">
+        <div class="container-fluid" style="width: 95%;">
+            <div class="logo" style="line-height: 55px;">
+                <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1625816066/%EC%9B%8C%EB%84%88%EB%B2%84%EC%8A%A4%EC%9D%B4%EB%85%B8%EB%B2%A0%EC%9D%B4%EC%85%98%EB%A1%9C%EA%B3%A02_wqthvw.jpg"
+                alt height="32">
+            </div>
+        </div>
+    </div>
+    <div class="nvbar-custom active" style="background-color: #fff; height:60px;">
+        <div class="container-fluid" style="width: 98%;">
+            <div id="navigation" class="active">
+                <ul class="navigation-menu">
+                    <li class="has-submenu active" style="display: inline-block; position: relative;">
+                        <a href="{% url 'rfid:main' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Dashboard</a>
+                    </li>
+                    <li class="has-submenu active" style="display: inline-block; position: relative;">
+                        <a href="{% url 'rfid:index' %}" style="color: #fd6e77; line-height: 55px; padding-right: 80px; font-weight:bold;">Material_Warehouse</a>
+                    </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                          <a href="{% url 'rfid:proline' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Production_Line</a>
+                     </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                         <a href="{% url 'rfid:fpware' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Finished_Product_Warehouse</a>
+                     </li>
+                     <li class="has-submenu active" style="display: inline-block; position: relative;">
+                         <a href="{% url 'rfid:dir' %}" style="color:black; line-height: 55px; padding-right: 80px; font-weight:bold;">Direction</a>
+                     </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-3" style="padding-top: 110px;">
+    <div class="row justify-content-between my-3">
+        <div class="col-2">
+            <select class="form-control so">
+                <option value="rcrecent" {% if so == 'rcrecent' %}selected{% endif %}>입고 최신순</option>
+                <option value="many" {% if so == 'many' %}selected{% endif %}>수량순</option>
+                <option value="rlrecent" {% if so == 'rlrecent' %}selected{% endif %}>출고 최신순</option>
+            </select>
+        </div>
+        <div class="col-4 input-group">
+            <input type="text" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>번호</th>
+            <th>입고날짜</th>
+            <th>RFID넘버</th>
+            <th>제품ID</th>
+            <th>수량</th>
+            <th>위치</th>
+            <th>출고날짜</th>
+        </tr>
+        </thead>
+        <tbody id="mytable1">
+        {% if material_list %}
+        {% for material in material_list %}
+        <tr>
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ material_list.paginator.count|sub:material_list.start_index|sub:forloop.counter0|add:1 }}
+            </td>
+            <td>{{ material.Receiving_Date_mw|date:"Y-m-d H:i:s" }}</td>
+            <td>
+                <a href="{% url 'rfid:mt_edit' material.id %}">{{ material.RFID_Number_mw }}</a>
+            </td>
+            <td>{{ material.Product_ID }}</td>
+            <td>{{ material.Quantity_mw }}</td>
+            <td>{{ material.Location_mw }}</td>
+            <td>{{ material.Release_Date_mw|date:"Y-m-d H:i:s" }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">내용이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+     <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if material_list.has_previous %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ material_list.previous_page_number }}" href="#">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in material_list.paginator.page_range %}
+        {% if page_number >= material_list.number|add:-5 and page_number <= material_list.number|add:5 %}
+            {% if page_number == material_list.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                 <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if material_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ material_list.next_page_number }}" href="#">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+             <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+</div>
+<form id="searchForm" method="get" action="{% url 'rfid:index' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+    <input type="hidden" id="so" name="so" value="{{ so }}">
+</form>
+{% endblock %}
+{% block script %}
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('af1394a6d38f4e31ac54', {
+      cluster: 'ap3'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      document.getElementById("mytable1");
+      var table = document.getElementById("mytable1");
+      var row = table.insertRow(0);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+      var cell7 = row.insertCell(6);
+      cell1.textContent = data["id"];
+      cell2.textContent = moment(data["Receiving_Date_mw"]).format('YYYY-MM-DD HH:mm:ss');
+      cell3.textContent = data["RFID_Number_mw"];
+      cell4.textContent = data["Product_ID"];
+      cell5.textContent = data["Quantity_mw"]+"";
+      cell6.textContent = data["Location_mw"];
+      cell7.textContent = moment(data["Release_Date_mw"]).format('YYYY-MM-DD HH:mm:ss');
+    });
+</script>
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+    $("#btn_search").on('click', function() {
+        $("#kw").val($(".kw").val());
+        $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        $("#searchForm").submit();
+    });
+
+    $(".so").on('change', function() {
+        $("#so").val($(this).val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+});
+</script>
+{% endblock %}
