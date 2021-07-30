@@ -1,14 +1,14 @@
 {% extends 'base4.html' %}
 {% load page_filter %}
 {% block content %}
-<div class="container my-3" style="padding-top: 110px; padding-left: 100px; float:left; width:50%;">
+<div class="container my-3" style="padding-top: 110px;">
     <h5 class="my-3 border-bottom pb-2">인라인 정보</h5>
     <div class="row justify-content-between my-3">
         <div class="col-2">
             <select class="form-control so">
                 <option value="inrecent" {% if so == 'inrecent' %}selected{% endif %}>인라인 최신순</option>
                 <option value="many" {% if so == 'many' %}selected{% endif %}>수량순</option>
-                <option value="loc1" {% if so == 'loc1' %}selected{% endif %}>방향순</option>
+<!--                <option value="loc1" {% if so == 'loc1' %}selected{% endif %}>방향순</option>-->
             </select>
         </div>
         <div class="col-4 input-group">
@@ -25,7 +25,6 @@
             <th>인라인날짜</th>
             <th>RFID넘버</th>
             <th>수량</th>
-            <th>방향</th>
         </tr>
         </thead>
         <tbody id="mytable2">
@@ -41,7 +40,6 @@
                 <a href="{% url 'rfid:pl_edit' production.id %}">{{ production.RFID_Number_pl }}</a>
             </td>
             <td>{{ production.Quantity_pl}}</td>
-            <td>{{ production.Location_pl1}}</td>
         </tr>
         {% endfor %}
         {% else %}
@@ -90,95 +88,95 @@
     </ul>
     <!-- 페이징처리 끝 -->
 </div>
-<div class="container my-3" style="padding-top: 110px; padding-right: 100px; float:right; width:50%;">
-    <h5 class="my-3 border-bottom pb-2">아웃라인 정보</h5>
-    <div class="row justify-content-between my-3">
-        <div class="col-2">
-            <select class="form-control so2">
-                <option value="olrecent" {% if so2 == 'olrecent' %}selected{% endif %}>아웃라인 최신순</option>
-                <option value="many2" {% if so2 == 'many2' %}selected{% endif %}>수량순</option>
-                <option value="loc" {% if so2 == 'loc' %}selected{% endif %}>방향순</option>
-            </select>
-        </div>
-        <div class="col-4 input-group">
-            <input type="text" class="form-control kw2" value="{{ kw2|default_if_none:'' }}">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="btn_search2">찾기</button>
-            </div>
-        </div>
-    </div>
-    <table class="table">
-        <thead>
-        <tr class="thead-dark">
-            <th>번호</th>
-            <th>아웃라인날짜</th>
-            <th>RFID넘버</th>
-            <th>수량</th>
-            <th>방향</th>
-        </tr>
-        </thead>
-        <tbody id="mytable2out">
-        {% if production_list2 %}
-        {% for production2 in production_list2 %}
-        <tr>
-            <td>
-                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
-                {{ production_list2.paginator.count|sub:production_list2.start_index|sub:forloop.counter0|add:1 }}
-            </td>
-            <td>{{ production2.Outline_Date|date:"Y-m-d H:i:s" }}</td>
-            <td>
-                <a href="{% url 'rfid:pl_edit2' production2.id %}">{{ production2.RFID_Number_plout }}</a>
-            </td>
-            <td>{{ production2.Quantity_plout }}</td>
-            <td>{{ production2.Location_pl }}</td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-            <td colspan="3">내용이 없습니다.</td>
-        </tr>
-        {% endif %}
-        </tbody>
-    </table>
-     <!-- 페이징처리 시작 -->
-    <ul class="pagination justify-content-center">
-        <!-- 이전페이지 -->
-        {% if production_list2.has_previous %}
-        <li class="page-item">
-            <a class="page-link" id="pageli7" data-page="{{ production_list2.previous_page_number }}" href="#">이전</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" id="pageli8" tabindex="-1" aria-disabled="true" href="#">이전</a>
-        </li>
-        {% endif %}
-        <!-- 페이지리스트 -->
-        {% for page_number in production_list2.paginator.page_range %}
-        {% if page_number >= production_list2.number|add:-5 and page_number <= production_list2.number|add:5 %}
-            {% if page_number == production_list2.number %}
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" id="pageli9" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
-            </li>
-            {% else %}
-            <li class="page-item">
-                 <a class="page-link" id="pageli10" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
-            </li>
-            {% endif %}
-        {% endif %}
-        {% endfor %}
-        <!-- 다음페이지 -->
-        {% if production_list2.has_next %}
-        <li class="page-item">
-            <a class="page-link" id="pageli11" data-page="{{ production_list2.next_page_number }}" href="#">다음</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-             <a class="page-link" id="pageli12" tabindex="-1" aria-disabled="true" href="#">다음</a>
-        </li>
-        {% endif %}
-    </ul>
-    <!-- 페이징처리 끝 -->
-</div>
+<!--<div class="container my-3" style="padding-top: 110px; padding-right: 100px; float:right; width:50%;">-->
+<!--    <h5 class="my-3 border-bottom pb-2">아웃라인 정보</h5>-->
+<!--    <div class="row justify-content-between my-3">-->
+<!--        <div class="col-2">-->
+<!--            <select class="form-control so2">-->
+<!--                <option value="olrecent" {% if so2 == 'olrecent' %}selected{% endif %}>아웃라인 최신순</option>-->
+<!--                <option value="many2" {% if so2 == 'many2' %}selected{% endif %}>수량순</option>-->
+<!--                <option value="loc" {% if so2 == 'loc' %}selected{% endif %}>방향순</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--        <div class="col-4 input-group">-->
+<!--            <input type="text" class="form-control kw2" value="{{ kw2|default_if_none:'' }}">-->
+<!--            <div class="input-group-append">-->
+<!--                <button class="btn btn-outline-secondary" type="button" id="btn_search2">찾기</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr class="thead-dark">-->
+<!--            <th>번호</th>-->
+<!--            <th>아웃라인날짜</th>-->
+<!--            <th>RFID넘버</th>-->
+<!--            <th>수량</th>-->
+<!--            <th>방향</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody id="mytable2out">-->
+<!--        {% if production_list2 %}-->
+<!--        {% for production2 in production_list2 %}-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                &lt;!&ndash; 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 &ndash;&gt;-->
+<!--                {{ production_list2.paginator.count|sub:production_list2.start_index|sub:forloop.counter0|add:1 }}-->
+<!--            </td>-->
+<!--            <td>{{ production2.Outline_Date|date:"Y-m-d H:i:s" }}</td>-->
+<!--            <td>-->
+<!--                <a href="{% url 'rfid:pl_edit2' production2.id %}">{{ production2.RFID_Number_plout }}</a>-->
+<!--            </td>-->
+<!--            <td>{{ production2.Quantity_plout }}</td>-->
+<!--            <td>{{ production2.Location_pl }}</td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--        {% else %}-->
+<!--        <tr>-->
+<!--            <td colspan="3">내용이 없습니다.</td>-->
+<!--        </tr>-->
+<!--        {% endif %}-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--     &lt;!&ndash; 페이징처리 시작 &ndash;&gt;-->
+<!--    <ul class="pagination justify-content-center">-->
+<!--        &lt;!&ndash; 이전페이지 &ndash;&gt;-->
+<!--        {% if production_list2.has_previous %}-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" id="pageli7" data-page="{{ production_list2.previous_page_number }}" href="#">이전</a>-->
+<!--        </li>-->
+<!--        {% else %}-->
+<!--        <li class="page-item disabled">-->
+<!--            <a class="page-link" id="pageli8" tabindex="-1" aria-disabled="true" href="#">이전</a>-->
+<!--        </li>-->
+<!--        {% endif %}-->
+<!--        &lt;!&ndash; 페이지리스트 &ndash;&gt;-->
+<!--        {% for page_number in production_list2.paginator.page_range %}-->
+<!--        {% if page_number >= production_list2.number|add:-5 and page_number <= production_list2.number|add:5 %}-->
+<!--            {% if page_number == production_list2.number %}-->
+<!--            <li class="page-item active" aria-current="page">-->
+<!--                <a class="page-link" id="pageli9" data-page="{{ page_number }}" href="#">{{ page_number }}</a>-->
+<!--            </li>-->
+<!--            {% else %}-->
+<!--            <li class="page-item">-->
+<!--                 <a class="page-link" id="pageli10" data-page="{{ page_number }}" href="#">{{ page_number }}</a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
+<!--        {% endif %}-->
+<!--        {% endfor %}-->
+<!--        &lt;!&ndash; 다음페이지 &ndash;&gt;-->
+<!--        {% if production_list2.has_next %}-->
+<!--        <li class="page-item">-->
+<!--            <a class="page-link" id="pageli11" data-page="{{ production_list2.next_page_number }}" href="#">다음</a>-->
+<!--        </li>-->
+<!--        {% else %}-->
+<!--        <li class="page-item disabled">-->
+<!--             <a class="page-link" id="pageli12" tabindex="-1" aria-disabled="true" href="#">다음</a>-->
+<!--        </li>-->
+<!--        {% endif %}-->
+<!--    </ul>-->
+<!--    &lt;!&ndash; 페이징처리 끝 &ndash;&gt;-->
+<!--</div>-->
 <form id="searchForm" method="get" action="{% url 'rfid:proline' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
@@ -209,12 +207,10 @@
       var cell2 = row.insertCell(1);
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
       cell1.textContent = data["id"];
       cell2.textContent = moment(data["Inline_Date"]).format('YYYY-MM-DD HH:mm:ss');
       cell3.textContent = data["RFID_Number_pl"];
       cell4.textContent = data["Quantity_pl"]+"";
-      cell5.textContent = data["Location_pl1"];
     });
 </script>
 <script type='text/javascript'>
