@@ -45,4 +45,5 @@ urlpatterns = [
     path('fwout/<int:finished2_id>/modify/', views.fwout_modify, name='fwout_mdf'),
     path('fwout/<int:finished2_id>/delete/', views.fwout_delete, name='fwout_del'),
     path('rest7/', views.finishedout_list),
+    path('rest8/', views.production_listcl.as_view()),
 ]

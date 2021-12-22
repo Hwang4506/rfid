@@ -12,6 +12,12 @@ from rfid.serializers import MaterialSerializer, ProductionSerializer, FinishedS
 from django.contrib import messages
 from .forms import ProductionForm, MaterialForm, FinishedForm, DirectionForm, MaterialoutForm, \
     ProductionoutForm, FinishedoutoutForm
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
 
 def index(request):
     """
@@ -232,6 +238,25 @@ def production_list(request):
             # print("아이디 : ", serializer.data["id"])
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+
+class production_listcl(generics.ListCreateAPIView):
+    queryset = Production_Line.objects.all()
+    serializer_class = ProductionSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id', 'RFID_Number_pl', 'Quantity_pl', 'Location_pl1')
+
+# class production_listcl(APIView):
+#     def get(self, request, format=None):
+#         queryset = Production_Line.objects.all()
+#         serializer = ProductionSerializer(queryset, many=True)
+#
+#         return Response(serializer.data)
+    # def post(self, request, format=None):
+    #     serializer = ProductionSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
 def finished_list(request):

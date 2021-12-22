@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['3.37.140.56']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_filters',
     'rest_framework',
     'common.apps.CommonConfig',
     'rfid.apps.RfidConfig',
@@ -131,3 +132,7 @@ LOGIN_REDIRECT_URL = '/rfid/mw'
 
 # 로그아웃 후 이동하는 URL
 LOGOUT_REDIRECT_URL = '/common/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
